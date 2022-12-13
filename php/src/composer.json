@@ -1,0 +1,11 @@
+{
+    "name": "adamo/tracker",
+    "require": {
+        "league/plates": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Adamo\\Tracker\\": "."
+        }
+    }
+}

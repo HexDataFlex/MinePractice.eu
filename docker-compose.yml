@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  php:
+    container_name: mp-php
+    image: php:8.0-apache
+    build:
+      context: ./php/
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./php/src:/var/www/html/
+    ports:
+      - 8000:80
+  db:
+    container_name: mp-db
+    image: mysql
+    restart: always
+    environment:
+        MYSQL_ALLOW_EMPTY_PASSWORD: true
+        MYSQL_DATABASE: tracker
+    ports:
+        - "9906:3306"
+  pma:
+    container_name: mp-pma
+    image: phpmyadmin/phpmyadmin
+    ports:
+        - '6789:80'
+    restart: always
+    environment:
+        PMA_HOST: db
+    depends_on:
+        - db
